@@ -1,0 +1,53 @@
+/**
+* @Author: Bala
+**/
+
+namespace org.india.immigration
+
+/**
+* This code is written in Hyperledger Composer CTO Language. 
+* As per language restrictions transaction is being modelled as a Passenger Asset. In real life deployments the same is 
+  not needed. 
+* This is a working sample and can be imported inside a composer playground with the corresponding script file to execute
+  transactions. 
+**/
+
+asset Passenger identified by passportNo {
+  o String passportNo
+  o String givenName
+  o String lastName
+  o String middleName
+  o Long age
+  o String passportExpiry
+  o String visaNo
+  o String destCountry
+  o String depCountry
+  o String depStatus
+  o Port departurePort
+  o String[] endorsers 
+  
+}
+
+concept Port {
+ o String portNo
+ o String portName
+}
+
+participant ImmigrationOfficerPeer identified by officerID {
+	o String officerID
+	o String officerName
+	o Port port
+}
+
+participant EndorserAgency identified by agencyCode {
+  o String agencyCode
+  o String agencyName
+}
+
+transaction Depart {
+	o String departId
+	-->Passenger p
+	-->ImmigrationOfficerPeer i
+	o String officerRemark
+	
+}
